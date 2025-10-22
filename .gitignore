@@ -1,0 +1,25 @@
+# Gradle files
+.gradle/
+build/
+
+# Local configuration
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+/.idea/tasks.xml
+/.idea/dictionaries
+/.idea/caches
+/.idea/modules.xml
+/.idea/gradle.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Kotlin/Java files
+*.iml

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Marcador Pádel</string>
+    <string name="point_a">Punto equipo A</string>
+    <string name="point_b">Punto equipo B</string>
+    <string name="reset">Resetear</string>
+    <string name="sets">Sets</string>
+    <string name="games">Juegos</string>
+    <string name="actual">Set actual</string>
+    <string name="tie_break">Tie-break</string>
+    <string name="winner_a">🏆 Gana el Equipo A</string>
+    <string name="winner_b">🏆 Gana el Equipo B</string>
+</resources>

@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Padel Score</string>
+    <string name="point_a">Point team A</string>
+    <string name="point_b">Point team B</string>
+    <string name="reset">Reset</string>
+    <string name="sets">Sets</string>
+    <string name="games">Games</string>
+    <string name="actual">Set play</string>
+    <string name="tie_break">Tie-break</string>
+    <string name="winner_a">🏆 Winner: Team A</string>
+    <string name="winner_b">🏆 Winner: Team B</string>
+</resources>

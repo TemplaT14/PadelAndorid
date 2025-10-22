@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Marcador Pàdel</string>
+    <string name="point_a">Punt equip A</string>
+    <string name="point_b">Punt equip B</string>
+    <string name="reset">Reinicia</string>
+    <string name="sets">Sets</string>
+    <string name="games">Jocs</string>
+    <string name="actual">Set actual</string>
+    <string name="tie_break">Desempat</string>
+    <string name="winner_a">🏆 Guanya l’equip A</string>
+    <string name="winner_b">🏆 Guanya l’equip B</string>
+</resources>
