@@ -200,44 +200,17 @@ fun MarcadorPadel() {
 
         // Ganador
         if (partidoTerminado) {
+            val winnerText = if (setsA == 2) stringResource(R.string.winner_a)
+            else stringResource(R.string.winner_b)
+            val winnerColor = if (setsA == 2) colorResource(R.color.azul_team)
+            else colorResource(R.color.verde_team)
+
             Text(
-                text = if (setsA == 2) stringResource(R.string.winner_a)
-                else stringResource(R.string.winner_b),
-                fontSize = 22.sp,
-                color = MaterialTheme.colorScheme.primary
+                winnerText,
+                fontSize = dimensionResource(R.dimen.font_size_winner).value.sp,
+                fontWeight = FontWeight.Bold,
+                color = winnerColor
             )
-        }
-
-        // Botones puntos
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 1.dp),
-            horizontalArrangement = Arrangement.SpaceEvenly
-        ) {
-            Button(
-                onClick = {
-                    if (!partidoTerminado) {
-                        if (tieBreakActivo) tiePuntosA++ else puntosA++
-                        comprobarJuego()
-                    }
-                },
-                colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.azul_team))
-            ) {
-                Text(stringResource(R.string.point_a), color = Color.Black)
-            }
-
-            Button(
-                onClick = {
-                    if (!partidoTerminado) {
-                        if (tieBreakActivo) tiePuntosB++ else puntosB++
-                        comprobarJuego()
-                    }
-                },
-                colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.verde_team))
-            ) {
-                Text(stringResource(R.string.point_b), color = Color.Black)
-            }
         }
 
         // Botón Reset
