@@ -11,9 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -32,51 +30,6 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-    }
-}
-@Composable
-fun SectionLabel(label: String) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(colorResource(R.color.naranja_header))
-            .padding(dimensionResource(R.dimen.padding_section)),
-        horizontalArrangement = Arrangement.Center
-    ) {
-        Text(
-            text = label,
-            fontSize = dimensionResource(R.dimen.font_size_header).value.sp,
-            color = colorResource(R.color.black),
-            fontWeight = FontWeight.Bold
-        )
-    }
-}
-@Composable
-fun ScoreRow(
-    scoreA: Int,
-    scoreB: Int,
-    colorA: Color,
-    colorB: Color
-) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = dimensionResource(R.dimen.spacing_medium)),
-        horizontalArrangement = Arrangement.SpaceEvenly
-    ) {
-        Text(
-            text = "$scoreA",
-            fontSize = dimensionResource(R.dimen.font_size_number).value.sp,
-            color = colorA,
-            fontWeight = FontWeight.Bold
-        )
-
-        Text(
-            text = "$scoreB",
-            fontSize = dimensionResource(R.dimen.font_size_number).value.sp,
-            color = colorB,
-            fontWeight = FontWeight.Bold
-        )
     }
 }
 
@@ -160,57 +113,137 @@ fun MarcadorPadel() {
         verticalArrangement = Arrangement.SpaceEvenly
     ) {
         // Sets
-        SectionLabel(stringResource(R.string.sets))
-        ScoreRow(
-            scoreA = setsA,
-            scoreB = setsB,
-            colorA = colorResource(R.color.azul_team),
-            colorB = colorResource(R.color.verde_team)
+        Text(
+            text = stringResource(R.string.sets),
+            fontSize = 28.sp,
+            color = Color.Black,
+            textAlign = TextAlign.Center,
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(colorResource(R.color.naranja_header))
+                .padding(8.dp)
         )
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ) {
+            Text(
+                text = "$setsA",
+                fontSize = 100.sp,
+                color = colorResource(R.color.azul_team)
+            )
+            Text(
+                text = "$setsB",
+                fontSize = 100.sp,
+                color = colorResource(R.color.verde_team)
+            )
+        }
 
 
         // Juegos
-        SectionLabel(stringResource(R.string.games))
-        ScoreRow(
-            juegosA, juegosB,
-            colorResource(R.color.azul_team),
-            colorResource(R.color.verde_team)
+        Text(
+            text = stringResource(R.string.games),
+            fontSize = 28.sp,
+            color = Color.Black,
+            textAlign = TextAlign.Center,
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(Color(0xFFFF9800))
+                .padding(8.dp)
         )
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ) {
+            Text(
+                text = "$juegosA",
+                fontSize = 100.sp,
+                color = colorResource(R.color.azul_team)
+            )
+            Text(
+                text = "$juegosB",
+                fontSize = 100.sp,
+                color = colorResource(R.color.verde_team)
+            )
+        }
+
 
         // Puntos / Tie-break
-        SectionLabel(stringResource(R.string.actual))
-        if (tieBreakActivo) {
-            Text(
-                stringResource(R.string.tie_break),
-                color = colorResource(R.color.rojo_reset),
-                fontSize = dimensionResource(R.dimen.font_size_winner).value.sp,
-                fontWeight = FontWeight.Bold
-            )
-            ScoreRow(tiePuntosA, tiePuntosB,
-                     colorResource(R.color.azul_team),
-                     colorResource(R.color.verde_team)
-            )
-        } else {
-            ScoreRow(
-                puntosA, puntosB,
-                colorResource(R.color.azul_team),
-                colorResource(R.color.verde_team)
-            )
+        Text(
+            text = stringResource(R.string.actual),
+            fontSize = 28.sp,
+            color = Color.Black,
+            textAlign = TextAlign.Center,
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(Color(0xFFFF9800))
+                .padding(8.dp)
+        )
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ) {
+            if (tieBreakActivo) {
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Text("Tie-break", fontSize = 28.sp, color = Color.Black)
+                    Text("$tiePuntosA", fontSize = 100.sp, color = Color(0xFF2196F3))
+                }
+            } else {
+                Text("${if (puntosA < 4) puntosTexto[puntosA] else "40"}",
+                     fontSize = 100.sp, color = Color(0xFF2196F3))
+            }
+            if (tieBreakActivo) {
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Text("Tie-break", fontSize = 28.sp, color = Color.Black)
+                    Text("$tiePuntosB", fontSize = 100.sp, color = Color(0xFFBADA55))
+                }
+            } else {
+                Text("${if (puntosB < 4) puntosTexto[puntosB] else "40"}",
+                     fontSize = 100.sp, color = Color(0xFFBADA55))
+            }
+
         }
 
         // Ganador
         if (partidoTerminado) {
-            val winnerText = if (setsA == 2) stringResource(R.string.winner_a)
-            else stringResource(R.string.winner_b)
-            val winnerColor = if (setsA == 2) colorResource(R.color.azul_team)
-            else colorResource(R.color.verde_team)
-
             Text(
-                winnerText,
-                fontSize = dimensionResource(R.dimen.font_size_winner).value.sp,
-                fontWeight = FontWeight.Bold,
-                color = winnerColor
+                text = if (setsA == 2) stringResource(R.string.winner_a)
+                else stringResource(R.string.winner_b),
+                fontSize = 22.sp,
+                color = MaterialTheme.colorScheme.primary
             )
+        }
+
+        // Botones puntos
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 1.dp),
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ) {
+            Button(
+                onClick = {
+                    if (!partidoTerminado) {
+                        if (tieBreakActivo) tiePuntosA++ else puntosA++
+                        comprobarJuego()
+                    }
+                },
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2196F3))
+            ) {
+                Text(stringResource(R.string.point_a), color = Color.Black)
+            }
+
+            Button(
+                onClick = {
+                    if (!partidoTerminado) {
+                        if (tieBreakActivo) tiePuntosB++ else puntosB++
+                        comprobarJuego()
+                    }
+                },
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFBADA55))
+            ) {
+                Text(stringResource(R.string.point_b), color = Color.Black)
+            }
         }
 
         // Botón Reset
@@ -219,7 +252,7 @@ fun MarcadorPadel() {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 6.dp),
-            colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.rojo_reset))
+            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFe32636))
         ) {
             Text(stringResource(R.string.reset))
         }
