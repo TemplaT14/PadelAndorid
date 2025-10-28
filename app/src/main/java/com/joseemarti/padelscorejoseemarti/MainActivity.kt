@@ -34,6 +34,36 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
+fun SeccionMarcador(titulo: String, valorA: Int, valorB: Int) {
+    Text(
+        text = titulo,
+        fontSize = dimensionResource(R.dimen.texto_header).value.sp,
+        color = Color.Black,
+        textAlign = TextAlign.Center,
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(colorResource(R.color.naranja_header))
+            .padding(dimensionResource(R.dimen.padding_texto_header))
+    )
+
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceEvenly
+    ) {
+        Text(
+            text = "$valorA",
+            fontSize = dimensionResource(R.dimen.texto_puntos).value.sp,
+            color = colorResource(R.color.azul_team)
+        )
+        Text(
+            text = "$valorB",
+            fontSize = dimensionResource(R.dimen.texto_puntos).value.sp,
+            color = colorResource(R.color.verde_team)
+        )
+    }
+}
+
+@Composable
 fun MarcadorPadel() {
     var setsA by remember { mutableStateOf(0) }
     var setsB by remember { mutableStateOf(0) }
@@ -74,7 +104,6 @@ fun MarcadorPadel() {
 
     fun comprobarJuego() {
         if (tieBreakActivo) {
-            // Tie-break
             if ((tiePuntosA >= 7 && tiePuntosA - tiePuntosB >= 2)) {
                 setsA++
                 juegosA = 0; juegosB = 0
@@ -87,7 +116,6 @@ fun MarcadorPadel() {
                 tiePuntosA = 0; tiePuntosB = 0
             }
         } else {
-            // Juego normal
             if (puntosA >= 3 && puntosB >= 3) {
                 if (puntosA == puntosB + 1) {
                     juegosA++; puntosA = 0; puntosB = 0
@@ -112,61 +140,13 @@ fun MarcadorPadel() {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceEvenly
     ) {
-        // Sets
-        Text(
-            text = stringResource(R.string.sets),
-            fontSize = dimensionResource(R.dimen.texto_header).value.sp,
-            color = Color.Black,
-            textAlign = TextAlign.Center,
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(colorResource(R.color.naranja_header))
-                .padding(dimensionResource(R.dimen.padding_texto_header))
-        )
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceEvenly
-        ) {
-            Text(
-                text = "$setsA",
-                fontSize = dimensionResource(R.dimen.texto_puntos).value.sp,
-                color = colorResource(R.color.azul_team)
-            )
-            Text(
-                text = "$setsB",
-                fontSize = dimensionResource(R.dimen.texto_puntos).value.sp,
-                color = colorResource(R.color.verde_team)
-            )
-        }
+        // --- Sets ---
+        SeccionMarcador(stringResource(R.string.sets), setsA, setsB)
 
-        // Juegos
-        Text(
-            text = stringResource(R.string.games),
-            fontSize = dimensionResource(R.dimen.texto_header).value.sp,
-            color = Color.Black,
-            textAlign = TextAlign.Center,
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(colorResource(R.color.naranja_header))
-                .padding(dimensionResource(R.dimen.padding_texto_header))
-        )
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceEvenly
-        ) {
-            Text(
-                text = "$juegosA",
-                fontSize = dimensionResource(R.dimen.texto_puntos).value.sp,
-                color = colorResource(R.color.azul_team)
-            )
-            Text(
-                text = "$juegosB",
-                fontSize = dimensionResource(R.dimen.texto_puntos).value.sp,
-                color = colorResource(R.color.verde_team)
-            )
-        }
+        // --- Juegos ---
+        SeccionMarcador(stringResource(R.string.games), juegosA, juegosB)
 
-        // Puntos / Tie-break
+        // --- Puntos / Tie-break ---
         Text(
             text = stringResource(R.string.actual),
             fontSize = dimensionResource(R.dimen.texto_header).value.sp,
@@ -177,63 +157,40 @@ fun MarcadorPadel() {
                 .background(colorResource(R.color.naranja_header))
                 .padding(dimensionResource(R.dimen.padding_texto_header))
         )
+
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
             if (tieBreakActivo) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text(
-                        "Tie-break",
-                        fontSize = dimensionResource(R.dimen.texto_header).value.sp,
-                        color = Color.Black
-                    )
-                    Text(
-                        "$tiePuntosA",
-                        fontSize = dimensionResource(R.dimen.texto_puntos).value.sp,
-                        color = colorResource(R.color.azul_team)
-                    )
+                    Text("Tie-break", fontSize = dimensionResource(R.dimen.texto_header).value.sp, color = Color.Black)
+                    Text("$tiePuntosA", fontSize = dimensionResource(R.dimen.texto_puntos).value.sp, color = colorResource(R.color.azul_team))
                 }
             } else {
-                Text(
-                    if (puntosA < 4) puntosTexto[puntosA] else "40",
-                    fontSize = dimensionResource(R.dimen.texto_puntos).value.sp,
-                    color = colorResource(R.color.azul_team)
-                )
+                Text(if (puntosA < 4) puntosTexto[puntosA] else "40", fontSize = dimensionResource(R.dimen.texto_puntos).value.sp, color = colorResource(R.color.azul_team))
             }
+
             if (tieBreakActivo) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text(
-                        "Tie-break",
-                        fontSize = dimensionResource(R.dimen.texto_header).value.sp,
-                        color = Color.Black
-                    )
-                    Text(
-                        "$tiePuntosB",
-                        fontSize = dimensionResource(R.dimen.texto_puntos).value.sp,
-                        color = colorResource(R.color.verde_team)
-                    )
+                    Text("Tie-break", fontSize = dimensionResource(R.dimen.texto_header).value.sp, color = Color.Black)
+                    Text("$tiePuntosB", fontSize = dimensionResource(R.dimen.texto_puntos).value.sp, color = colorResource(R.color.verde_team))
                 }
             } else {
-                Text(
-                    if (puntosB < 4) puntosTexto[puntosB] else "40",
-                    fontSize = dimensionResource(R.dimen.texto_puntos).value.sp,
-                    color = colorResource(R.color.verde_team)
-                )
+                Text(if (puntosB < 4) puntosTexto[puntosB] else "40", fontSize = dimensionResource(R.dimen.texto_puntos).value.sp, color = colorResource(R.color.verde_team))
             }
         }
 
-        // Ganador
+        // --- Ganador ---
         if (partidoTerminado) {
             Text(
-                text = if (setsA == 2) stringResource(R.string.winner_a)
-                else stringResource(R.string.winner_b),
+                text = if (setsA == 2) stringResource(R.string.winner_a) else stringResource(R.string.winner_b),
                 fontSize = dimensionResource(R.dimen.texto_ganador).value.sp,
                 color = MaterialTheme.colorScheme.primary
             )
         }
 
-        // Botones puntos
+        // --- Botones puntos ---
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -265,7 +222,7 @@ fun MarcadorPadel() {
             }
         }
 
-        // Botón Reset
+        // --- Botón Reset ---
         Button(
             onClick = { resetTodo() },
             modifier = Modifier
