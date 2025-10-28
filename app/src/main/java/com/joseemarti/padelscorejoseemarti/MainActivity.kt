@@ -11,9 +11,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.joseemarti.padelscorejoseemarti.ui.theme.PadelScoreJoseEMartiTheme
 
@@ -108,20 +108,20 @@ fun MarcadorPadel() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(0.dp),
+            .padding(dimensionResource(id = R.dimen.padding_general)),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceEvenly
     ) {
         // Sets
         Text(
             text = stringResource(R.string.sets),
-            fontSize = 28.sp,
+            fontSize = dimensionResource(R.dimen.texto_header).value.sp,
             color = Color.Black,
             textAlign = TextAlign.Center,
             modifier = Modifier
                 .fillMaxWidth()
                 .background(colorResource(R.color.naranja_header))
-                .padding(8.dp)
+                .padding(dimensionResource(R.dimen.padding_texto_header))
         )
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -129,27 +129,26 @@ fun MarcadorPadel() {
         ) {
             Text(
                 text = "$setsA",
-                fontSize = 100.sp,
+                fontSize = dimensionResource(R.dimen.texto_puntos).value.sp,
                 color = colorResource(R.color.azul_team)
             )
             Text(
                 text = "$setsB",
-                fontSize = 100.sp,
+                fontSize = dimensionResource(R.dimen.texto_puntos).value.sp,
                 color = colorResource(R.color.verde_team)
             )
         }
 
-
         // Juegos
         Text(
             text = stringResource(R.string.games),
-            fontSize = 28.sp,
+            fontSize = dimensionResource(R.dimen.texto_header).value.sp,
             color = Color.Black,
             textAlign = TextAlign.Center,
             modifier = Modifier
                 .fillMaxWidth()
-                .background(Color(0xFFFF9800))
-                .padding(8.dp)
+                .background(colorResource(R.color.naranja_header))
+                .padding(dimensionResource(R.dimen.padding_texto_header))
         )
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -157,27 +156,26 @@ fun MarcadorPadel() {
         ) {
             Text(
                 text = "$juegosA",
-                fontSize = 100.sp,
+                fontSize = dimensionResource(R.dimen.texto_puntos).value.sp,
                 color = colorResource(R.color.azul_team)
             )
             Text(
                 text = "$juegosB",
-                fontSize = 100.sp,
+                fontSize = dimensionResource(R.dimen.texto_puntos).value.sp,
                 color = colorResource(R.color.verde_team)
             )
         }
 
-
         // Puntos / Tie-break
         Text(
             text = stringResource(R.string.actual),
-            fontSize = 28.sp,
+            fontSize = dimensionResource(R.dimen.texto_header).value.sp,
             color = Color.Black,
             textAlign = TextAlign.Center,
             modifier = Modifier
                 .fillMaxWidth()
-                .background(Color(0xFFFF9800))
-                .padding(8.dp)
+                .background(colorResource(R.color.naranja_header))
+                .padding(dimensionResource(R.dimen.padding_texto_header))
         )
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -185,23 +183,44 @@ fun MarcadorPadel() {
         ) {
             if (tieBreakActivo) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text("Tie-break", fontSize = 28.sp, color = Color.Black)
-                    Text("$tiePuntosA", fontSize = 100.sp, color = Color(0xFF2196F3))
+                    Text(
+                        "Tie-break",
+                        fontSize = dimensionResource(R.dimen.texto_header).value.sp,
+                        color = Color.Black
+                    )
+                    Text(
+                        "$tiePuntosA",
+                        fontSize = dimensionResource(R.dimen.texto_puntos).value.sp,
+                        color = colorResource(R.color.azul_team)
+                    )
                 }
             } else {
-                Text("${if (puntosA < 4) puntosTexto[puntosA] else "40"}",
-                     fontSize = 100.sp, color = Color(0xFF2196F3))
+                Text(
+                    if (puntosA < 4) puntosTexto[puntosA] else "40",
+                    fontSize = dimensionResource(R.dimen.texto_puntos).value.sp,
+                    color = colorResource(R.color.azul_team)
+                )
             }
             if (tieBreakActivo) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text("Tie-break", fontSize = 28.sp, color = Color.Black)
-                    Text("$tiePuntosB", fontSize = 100.sp, color = Color(0xFFBADA55))
+                    Text(
+                        "Tie-break",
+                        fontSize = dimensionResource(R.dimen.texto_header).value.sp,
+                        color = Color.Black
+                    )
+                    Text(
+                        "$tiePuntosB",
+                        fontSize = dimensionResource(R.dimen.texto_puntos).value.sp,
+                        color = colorResource(R.color.verde_team)
+                    )
                 }
             } else {
-                Text("${if (puntosB < 4) puntosTexto[puntosB] else "40"}",
-                     fontSize = 100.sp, color = Color(0xFFBADA55))
+                Text(
+                    if (puntosB < 4) puntosTexto[puntosB] else "40",
+                    fontSize = dimensionResource(R.dimen.texto_puntos).value.sp,
+                    color = colorResource(R.color.verde_team)
+                )
             }
-
         }
 
         // Ganador
@@ -209,7 +228,7 @@ fun MarcadorPadel() {
             Text(
                 text = if (setsA == 2) stringResource(R.string.winner_a)
                 else stringResource(R.string.winner_b),
-                fontSize = 22.sp,
+                fontSize = dimensionResource(R.dimen.texto_ganador).value.sp,
                 color = MaterialTheme.colorScheme.primary
             )
         }
@@ -218,7 +237,7 @@ fun MarcadorPadel() {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(bottom = 1.dp),
+                .padding(bottom = dimensionResource(id = R.dimen.peque)),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
             Button(
@@ -228,7 +247,7 @@ fun MarcadorPadel() {
                         comprobarJuego()
                     }
                 },
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2196F3))
+                colors = ButtonDefaults.buttonColors(containerColor = colorResource(R.color.azul_team))
             ) {
                 Text(stringResource(R.string.point_a), color = Color.Black)
             }
@@ -240,7 +259,7 @@ fun MarcadorPadel() {
                         comprobarJuego()
                     }
                 },
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFBADA55))
+                colors = ButtonDefaults.buttonColors(containerColor = colorResource(R.color.verde_team))
             ) {
                 Text(stringResource(R.string.point_b), color = Color.Black)
             }
@@ -251,8 +270,8 @@ fun MarcadorPadel() {
             onClick = { resetTodo() },
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 6.dp),
-            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFe32636))
+                .padding(horizontal = dimensionResource(id = R.dimen.boton)),
+            colors = ButtonDefaults.buttonColors(containerColor = colorResource(R.color.rojo_reset))
         ) {
             Text(stringResource(R.string.reset))
         }

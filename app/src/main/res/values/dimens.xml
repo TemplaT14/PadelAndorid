@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Text sizes -->
-    <dimen name="font_size_header">28sp</dimen>
-    <dimen name="font_size_number">100sp</dimen>
-    <dimen name="font_size_winner">22sp</dimen>
 
-    <!-- Paddings / Spacing -->
-    <dimen name="padding_section">8dp</dimen>
-    <dimen name="spacing_small">4dp</dimen>
-    <dimen name="spacing_medium">8dp</dimen>
-    <dimen name="spacing_large">16dp</dimen>
+    <!-- 🔹 Paddings generales -->
+    <dimen name="padding_general">0dp</dimen>
+    <dimen name="padding_texto_header">8dp</dimen>
+    <dimen name="boton">6dp</dimen>
+    <dimen name="peque">1dp</dimen>
 
-    <!-- Button height -->
-    <dimen name="height_button">48dp</dimen>
+    <!-- 🔹 Tamaños de texto -->
+    <dimen name="texto_header">28sp</dimen>
+    <dimen name="texto_puntos">100sp</dimen>
+    <dimen name="texto_ganador">22sp</dimen>
+
+    <!-- 🔹 Espaciados -->
+    <dimen name="espaciado_general">8dp</dimen>
+    <dimen name="espaciado_peque">4dp</dimen>
+
+    <!-- 🔹 Altura de botones (si luego quieres fijarla) -->
+    <dimen name="altura_boton">48dp</dimen>
+
 </resources>
